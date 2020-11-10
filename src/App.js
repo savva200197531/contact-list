@@ -5,7 +5,6 @@ import noAvatar from './assets/no-avatar.png'
 
 import Contacts from "./components/Contacts/Contacts";
 import ContactInfo from "./components/ContactInfo/ContactInfo";
-
 import FetchData from "./service/FetchData";
 
 class App extends React.Component {
