@@ -1,0 +1,39 @@
+.contacts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, auto));
+    grid-gap: 20px;
+    padding: 20px 0;
+    justify-content: center;
+}
+
+.contact {
+    border: 1px solid;
+    max-width: 400px;
+    hyphens: auto;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    color: white;
+}
+
+.contact:hover {
+    cursor: pointer;
+    border-radius: 7px;
+    transition: 0.2s;
+}
+
+.contact-info {
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.contact-info span {
+    font-weight: 700;
+}
+
+.contact-avatar img {
+    border-radius: 50%;
+    width: 128px;
+}
