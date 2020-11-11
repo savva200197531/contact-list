@@ -1,15 +1,16 @@
 import React from 'react';
 import './contacts.css';
 import { Link } from "react-router-dom";
+import useGetUsersInfo from "../../hooks/useGetUsersInfo";
 
 const Contacts = ({ users }) => {
 
+  const { data } = useGetUsersInfo();
   return (
     <>
-      {console.log('2')}
       <div className="contacts">
         {
-          users.map(user =>
+          data.map(user =>
             <Link key={user.id} className="contact" to={`user${user.id}`}>
               <div className="contact-avatar">
                 <img src={user.avatar} alt={`${user.username} has no avatar`}/>
