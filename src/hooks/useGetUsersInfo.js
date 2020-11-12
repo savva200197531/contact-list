@@ -8,7 +8,11 @@ const useGetUsersInfo = () => {
 
   useEffect(() => {
     fetchData.getUsers()
-      .then(users => setData(users))
+      .then(users => {
+        const json = JSON.stringify(users);
+        localStorage.setItem('usersData', json);
+        setData(JSON.parse(localStorage.getItem('usersData')))
+      })
   }, [])
 
   const getCurrentUser = userId => data.find(user => JSON.stringify(user.id) === userId);
