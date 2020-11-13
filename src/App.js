@@ -4,6 +4,7 @@ import './App.css';
 
 import Contacts from "./components/Contacts/Contacts";
 import ContactInfo from "./components/ContactInfo/ContactInfo";
+import useGetUsersInfo from "./hooks/useGetUsersInfo";
 
 const App = () => {
   // const newData = data.map(item => {
@@ -21,11 +22,13 @@ const App = () => {
   //       return data
   //     })
   // }
+  const { data } = useGetUsersInfo();
+
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path={'/'} render={() => <Contacts/>}/>
-        <Route path={'/:id'} render={() => <ContactInfo/>}/>
+        <Route exact path={'/'} render={() => <Contacts data={data}/>}/>
+        <Route path={'/:id'} render={() => <ContactInfo data={data}/>}/>
       </Switch>
     </BrowserRouter>
   );

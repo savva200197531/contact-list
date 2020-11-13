@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './contacts.css';
 import { Link } from "react-router-dom";
-import useGetUsersInfo from "../../hooks/useGetUsersInfo";
 
-const Contacts = ({ users }) => {
+const Contacts = ({ data }) => {
 
-  const { data } = useGetUsersInfo();
-  return (
+
+  const [ loading, setLoading ] = useState(false);
+
+  useEffect(() => {
+    !data ? setLoading(false) : setLoading(true);
+  }, [ data, loading ]);
+
+  if (!loading) {
+    return <div>Loading...</div>
+  } else return (
     <>
       <div className="contacts">
         {
@@ -27,6 +34,7 @@ const Contacts = ({ users }) => {
       </div>
     </>
   )
+
 }
 
 export default Contacts;

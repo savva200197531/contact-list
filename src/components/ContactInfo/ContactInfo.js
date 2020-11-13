@@ -7,7 +7,11 @@ import styled, { keyframes } from 'styled-components';
 
 const FadeIn = styled.div`animation: 1s ${keyframes`${fadeIn}`}`;
 
-const ContactInfo = ({ props }) => {
+const ContactInfo = ({data}) => {
+
+  // const userInfoNew = {
+  //   name: '',
+  // }
 
   const location = useLocation();
   const history = useHistory();
@@ -15,25 +19,33 @@ const ContactInfo = ({ props }) => {
   const [ userInfo, setUserInfo ] = useState(null);
   const [ redactOpen, setRedactOpen ] = useState(false);
   const [ showAddress, setShowAddress ] = useState(false);
+  // const [ inputValues, setInputValues ] = useState(userInfo)
+  const [ loading, setLoading ] = useState(false);
 
   useEffect(() => {
-    setUserInfo(getCurrentUser(location.pathname.slice(location.pathname.lastIndexOf('r') + 1)));
-  }, [ getCurrentUser, location.pathname ]);
+    !data ? setLoading(false) : setLoading(true);
+    if (data) {
+      // console.log(data);
+      setUserInfo(getCurrentUser(location.pathname.slice(location.pathname.lastIndexOf('r') + 1)));
+    }
+  }, [data, getCurrentUser, location.pathname]);
 
   const openRedact = () => {
     setRedactOpen(!redactOpen);
   }
 
-
-  if (!userInfo) return null;
+  const userDataChange = (event) => {
+    console.log(event.target)
+    console.log(userInfo)
+  }
 
   const redact = (value) => {
     if (redactOpen) {
       return (
-        <input type="text" className={value} defaultValue={value}/>
+        <input type="text" className={value} onChange={userDataChange} defaultValue={value}/>
       )
     } else {
-      console.log(value)
+      saveData(value)
       return value;
     }
   }
@@ -43,6 +55,7 @@ const ContactInfo = ({ props }) => {
     button = (
       <button onClick={() => {
         openRedact();
+        console.log(userInfo);
       }}>Save
       </button>
     )
@@ -55,7 +68,12 @@ const ContactInfo = ({ props }) => {
     )
   }
 
-  let address
+  const saveData = (value) => {
+    // console.log('-------');
+    // console.log(value);
+  }
+
+  let address;
   if (showAddress) {
     address = (
       <FadeIn>
@@ -67,7 +85,10 @@ const ContactInfo = ({ props }) => {
       </FadeIn>
     )
   }
-  return (
+  
+  if (!loading && !userInfo) {
+    return <div>Loading...</div>
+  } else return (
     <>
       <div className="header">
         <h1>Contact info</h1>
