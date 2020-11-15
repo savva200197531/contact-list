@@ -22,13 +22,12 @@ const App = () => {
   //       return data
   //     })
   // }
-  const { data } = useGetUsersInfo();
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path={'/'} render={() => <Contacts data={data}/>}/>
-        <Route path={'/:id'} render={() => <ContactInfo data={data}/>}/>
+        <Route exact path={'/'} render={() => <Contacts/>}/>
+        <Route path={'/:id'} render={() => <ContactInfo/>}/>
       </Switch>
     </BrowserRouter>
   );
