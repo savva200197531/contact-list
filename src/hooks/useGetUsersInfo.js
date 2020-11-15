@@ -18,21 +18,6 @@ const useGetUsersInfo = () => {
   useEffect(() => {
     fetchData.getUsers()
       .then(users => {
-        // const usersArr = users.map(user => {
-        //   return {
-        //     name: user.name,
-        //     username: user.username,
-        //     email: user.email,
-        //     phone: user.phone,
-        //     website: user.website,
-        //     avatar: user.avatar,
-        //     id: user.id,
-        //     city: user.address.city,
-        //     state: user.address.state,
-        //     country: user.address.country,
-        //     company: user.company.name
-        //   }
-        // })
         setData(users);
         setAllData(users);
       });
@@ -51,6 +36,8 @@ const useGetUsersInfo = () => {
         if(flag) return user;
       });
       setData(filteredData);
+    } else {
+      setData(allData);
     }
   }
 
