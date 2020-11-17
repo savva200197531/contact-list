@@ -29,10 +29,10 @@ const ContactInfo = () => {
 
   // stylization
 
-  const redact = (value) => {
+  const redact = (value, key) => {
     if (redactOpen) {
       return (
-        <input type="text" className={value} defaultValue={value}/>
+        <input data-key={key} type="text" className={value} defaultValue={value}/>
       )
     } else {
       return value;
@@ -61,14 +61,14 @@ const ContactInfo = () => {
   let button;
   if (redactOpen) {
     button = (
-      <button type="submit" onClick={() => {
-        openRedact();
-      }}>Save
+      <button type="submit">
+        Save
       </button>
     )
   } else {
     button = (
-      <button className="redact-btn" onClick={() => {
+      <button className="redact-btn" onClick={event => {
+        event.preventDefault();
         openRedact();
       }}>Redact profile
       </button>
@@ -77,10 +77,14 @@ const ContactInfo = () => {
 
   const submitForm = (event) => {
     event.preventDefault();
-    console.log(event.target.value)
-    if (event.target.value) {
-
-    }
+    const form = event.target.elements;
+    console.log(form)
+    // const user = {};
+    // for (let element of form) {
+    //   if (element.tagName !== 'BUTTON') {
+    //
+    //   }
+    // }
   }
 
   // content
@@ -99,7 +103,7 @@ const ContactInfo = () => {
         <form className="user-info" onSubmit={submitForm}>
           <img className="avatar" src={userInfo.avatar} alt={`${userInfo.username} has no avatar`}/>
           {button}
-          <div className="name"><span>name: </span>{redact(userInfo.name)}</div>
+          <div  className="name"><span>name: </span>{redact(userInfo.name)}</div>
           <div className="username"><span>username: </span>{redact(userInfo.username)}</div>
           <div className="email"><span>email: </span>{redact(userInfo.email)}</div>
           <div className="address">
